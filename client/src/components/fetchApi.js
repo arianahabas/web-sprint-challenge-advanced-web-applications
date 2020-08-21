@@ -1,13 +1,14 @@
 import { axiosWithAuth } from '../axiosWithAuth'
 
-export default function fetchApi(){
+export function fetchApi() {
     return axiosWithAuth()
-    .get('/colors')
-    .then((res)=> {
-     console.log(res)
-        return res
+    .get('/api/colors')
+    .then(res => {
+        // console.log(res)
+        return res.data
     })
-    .catch((err) => {
-      console.log(err)
+    .catch(err => {
+        console.log(err)
+    
     })
 }
