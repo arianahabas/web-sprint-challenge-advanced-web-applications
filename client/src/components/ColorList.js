@@ -59,7 +59,7 @@ const ColorList = ({ colors, updateColors }) => {
   };
 
   return (
-    <div  className="colors-wrap">
+    <div  data-testid="colortest"  className="colors-wrap">
       <p>colors</p>
       <ul>
         {colors.map(color => (
@@ -76,7 +76,7 @@ const ColorList = ({ colors, updateColors }) => {
             </span>
             <div
               className="color-box"
-              data-testid="colorTest" 
+              // data-testid="colortest" 
               style={{ backgroundColor: color.code.hex }}
             />
           </li>

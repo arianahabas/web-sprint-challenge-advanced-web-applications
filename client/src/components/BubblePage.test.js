@@ -1,46 +1,49 @@
-  
 import React from "react";
-import { render, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import BubblePage from "./BubblePage";
+import { fetchApi as mockApi } from './fetchApi'
 
+let mockData = [
+  {
+    color: "aliceblue",
+    code: {
+      hex: "#f0f8ff"
+    },
+    id: 1
+  },
+  {
+    color: "limegreen",
+    code: {
+      hex: "#99ddbc"
+    },
+    id: 2
+  },
+  {
+    color: "aqua",
+    code: {
+      hex: "#00ffff"
+    },
+    id: 3
+  }
+]
 
-import { fetchApi as mockFetch } from "./fetchApi";
-jest.mock("./fetchApi");
+jest.mock(`./fetchApi`)
 
-console.log (mockFetch)
-// test("Fetches data and renders the bubbles", () => {
-//   render(<BubblePage bubbles={[]} error="" />);
-// });
-const mockData = {
-  data: [
-    {
-      color: "aliceblue",
-      code: {
-        hex: "#f0f8ff",
-      },
-      id: 1,
-    },
-    {
-      color: "limegreen",
-      code: {
-        hex: "#99ddbc",
-      },
-      id: 2,
-    },
-    {
-      color: "aqua",
-      code: {
-        hex: "#00ffff",
-      },
-      id: 3,
-    },
-  ],
-};
 test("Fetches data and renders the bubbles", async () => {
-  mockFetch.mockResolvedValueOnce(mockData);
-  const { debug, getByText } = render(<BubblePage />);
+  // Finish this test
+  mockApi.mockResolvedValue(mockData)
+
+  render(<BubblePage />)
+
   await waitFor(() => {
-      debug();
-    expect(getByText(/aqua/i)).toBeInTheDocument()
+    expect(screen.getByTestId(/colortest/i)).toBeInTheDocument()
   })
+  // debug();
+
+  await waitFor(() => {
+    expect(screen.getByText(/aqua/i)).toBeInTheDocument()
+  })
+  
+
+
 });
