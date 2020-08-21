@@ -2,10 +2,10 @@ import { axiosWithAuth } from '../axiosWithAuth'
 
 export function fetchApi() {
     return axiosWithAuth()
-    .get('/api/colors')
+    .get('/colors')
     .then(res => {
         // console.log(res)
-        return res.data
+        return res
     })
     .catch(err => {
         console.log(err)

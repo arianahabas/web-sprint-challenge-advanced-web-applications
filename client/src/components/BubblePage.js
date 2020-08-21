@@ -16,7 +16,7 @@ const BubblePage = () => {
     // .get('/colors')
     fetchApi()
     .then((res)=> {
-      setColorList(res)
+      setColorList(res.data)
       console.log(res)
     })
     .catch((err) => {

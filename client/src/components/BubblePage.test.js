@@ -3,7 +3,8 @@ import { render, screen, waitFor } from "@testing-library/react";
 import BubblePage from "./BubblePage";
 import { fetchApi as mockApi } from './fetchApi'
 
-let mockData = [
+let mockData = {
+  data: [
   {
     color: "aliceblue",
     code: {
@@ -24,9 +25,9 @@ let mockData = [
       hex: "#00ffff"
     },
     id: 3
-  }
+  },
 ]
-
+}
 jest.mock(`./fetchApi`)
 
 test("Fetches data and renders the bubbles", async () => {
@@ -41,7 +42,7 @@ test("Fetches data and renders the bubbles", async () => {
   // debug();
 
   await waitFor(() => {
-    expect(screen.getByText(/aqua/i)).toBeInTheDocument()
+    expect(screen.getByText(/limegreen/i)).toBeInTheDocument()
   })
   
 
