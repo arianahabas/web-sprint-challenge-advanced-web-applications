@@ -36,7 +36,7 @@ const Login = () => {
       <h1>Welcome to the Bubble App!</h1>
 
       <form onSubmit={handleSubmit}>                 
-        <label className='label'>Username</label>
+        <label >Username</label>
         <div>
             <input
             type='username'
@@ -49,7 +49,7 @@ const Login = () => {
             />
         </div>
   
-        <label for='' className='label'>Password</label>
+        <label >Password</label>
             <input 
             type='password'
             placeholder='********'
@@ -59,7 +59,7 @@ const Login = () => {
             value={values.password}
             required
             />  
-        <button type='submit' className='button is-success'>Login</button>
+        <button type='submit'>Login</button>
     </form>
     </>
   );
