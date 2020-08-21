@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { axiosWithAuth } from "../axiosWithAuth";
 
 const initialColor = {
   color: "",
@@ -7,7 +8,8 @@ const initialColor = {
 };
 
 const ColorList = ({ colors, updateColors }) => {
-  console.log(colors);
+  // console.log(colors);
+
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
@@ -15,20 +17,49 @@ const ColorList = ({ colors, updateColors }) => {
     setEditing(true);
     setColorToEdit(color);
   };
+  // console.log('colors', colors)
+  // console.log('colorToEdit', colorToEdit)
+  // console.log('updatecolors', updateColors)
 
   const saveEdit = e => {
     e.preventDefault();
-    // Make a put request to save your updated color
-    // think about where will you get the id from...
-    // where is is saved right now?
+    // Make a put request to save your updated color ✅ 
+    // think about where will you get the id from...✅ 
+    // where is is saved right now?✅ 
+
+    axiosWithAuth()
+    .put(`/colors/${colorToEdit.id}`, colorToEdit)
+    .then((res) => {
+      console.log('it worked', res)
+      updateColors(colors.map(color =>{
+        if(color.id === colorToEdit.id){
+          return res.data
+        } else {
+          return color
+        }
+      }))
+      setEditing(false)
+    })
+    .catch((err)=>{
+      console.log('fail', err)
+    })
   };
 
   const deleteColor = color => {
-    // make a delete request to delete this color
+    // make a delete request to delete this color✅ 
+    axiosWithAuth()
+    .delete(`/colors/${color.id}`)
+    .then((res)=> {
+      // console.log(res)
+      updateColors(colors.filter((item)=> item.id !== color.id))
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
   };
 
   return (
-    <div className="colors-wrap">
+    <div  data-testid="colortest"  className="colors-wrap">
       <p>colors</p>
       <ul>
         {colors.map(color => (
@@ -45,6 +76,7 @@ const ColorList = ({ colors, updateColors }) => {
             </span>
             <div
               className="color-box"
+              // data-testid="colortest" 
               style={{ backgroundColor: color.code.hex }}
             />
           </li>
